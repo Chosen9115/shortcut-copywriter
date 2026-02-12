@@ -1,0 +1,59 @@
+api:
+  provider: "openai" # Options: openai, anthropic
+  base_url: "https://api.openai.com/v1"
+  key: "YOUR_API_KEY_HERE"
+  model: "gpt-5-mini" # Or gpt-4o, gpt-4o-mini
+  temperature: 0.3
+  presence_penalty: 0.0
+  frequency_penalty: 0.1
+
+global_instructions: |
+  Always rewrite based on the language that the user is writing in.
+  Rewrite the following text to be clear, concise, and professional.
+  Maintain the original meaning and nuance, but improve flow, grammar, and delivery.
+  Vary sentence length on purpose, use short, forceful lines for punch and decisions, medium lines for essential context, and occasional longer, rhythmic lines for smooth flow and delight.
+  Return ONLY the rewritten text, no explanations or quotes.
+  Avoid em dashes and semicolons.
+apps:
+  "WhatsApp":
+    instructions: |
+      Rewrite this for WhatsApp.
+      Casual, friendly, and very concise.
+      Feel free to use more emojis.
+  "Slack":
+    instructions: |
+      Rewrite this for a Slack message. 
+      Make it friendly, conversational, and direct. 
+  "Microsoft Teams":
+    instructions: |
+      Rewrite this for Microsoft Teams.
+      Keep it professional, clear, and action-oriented.
+      Avoid overly casual language.
+  "Mail":
+    instructions: |
+      Rewrite this as a professional email.
+      Write like an operator trying to move things forward today: open with a one-line context, present 2–3 clear options with concrete requirements, ask for only the minimum info needed to proceed, and close with a binary choice or a single next step.
+      Ensure the tone is polite and respectful.
+      Use standard email formatting if applicable.
+  "Messages":
+    instructions: |
+      Rewrite this as a text message (iMessage).
+      Keep it short, casual, and to the point.
+  "Google Chrome":
+    rules:
+      - if_title_contains: "Gmail"
+        instructions: |
+          Rewrite this for a Gmail email.
+          Write like an operator trying to move things forward today: open with a one-line context, present 2–3 clear options with concrete requirements, ask for only the minimum info needed to proceed, and close with a binary choice or a single next step.
+          Professional yet approachable tone.
+          Ensure clarity and proper etiquette.
+      - if_title_contains: "WhatsApp"
+        instructions: |
+          Rewrite this for WhatsApp.
+          Casual, friendly, and very concise.
+          Feel free to use more emojis.
+      - if_title_contains: "Twitter"
+        instructions: |
+          Rewrite this for a Twitter/X post.
+          Engaging, concise, and under 280 characters if possible.
+          Use 1-2 relevant hashtags.
