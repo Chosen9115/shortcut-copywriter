@@ -96,10 +96,7 @@ def call_llm(config, text, system_instruction):
             "messages": [
                 {"role": "system", "content": system_instruction},
                 {"role": "user", "content": text}
-            ],
-            "temperature": api_config.get("temperature", 0.7),
-            "frequency_penalty": api_config.get("frequency_penalty", 0.0),
-            "presence_penalty": api_config.get("presence_penalty", 0.0)
+            ]
         }
         
         try:
@@ -241,7 +238,13 @@ def main():
         # 5. Output Result
         print(new_text)
     except Exception as e:
-        print(f"Error: {str(e)}", file=sys.stderr)
+        error_msg = f"Error: {str(e)}"
+        print(error_msg, file=sys.stderr)
+        try:
+            with open(log_path, "a") as f:
+                f.write(f"EXCEPTION: {error_msg}\n")
+        except:
+            pass
         sys.exit(1)
 
 if __name__ == "__main__":
